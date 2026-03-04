@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "mcp__blender__execute_blender_code",
+      "mcp__blender__get_viewport_screenshot",
+      "mcp__blender__search_polyhaven_assets",
+      "mcp__blender__download_polyhaven_asset",
+      "mcp__blender__get_scene_info",
+      "Bash(node scripts/blender-send.js:*)"
+    ]
+  }
+}
