@@ -12,6 +12,9 @@ const outfit = Outfit({
 export const metadata = {
   title: 'Tesler Sauna',
   description: 'Tesleri saunamajad — kvaliteet ja luksus.',
+  icons: {
+    icon: '/Group-100x100.webp',
+  },
 };
 
 export default function RootLayout({ children }) {
