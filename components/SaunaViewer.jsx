@@ -201,7 +201,11 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
           }
         });
 
-        const box = new THREE.Box3().setFromObject(model);
+        // Compute bounds from mesh geometry only (skips empties/helpers like MIRROR)
+        const box = new THREE.Box3();
+        model.traverse((child) => {
+          if (child.isMesh) box.expandByObject(child);
+        });
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
 
