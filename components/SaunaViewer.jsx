@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-export default function SaunaViewer({ modelPath }) {
+export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
   const canvasRef = useRef(null);
   const [loadingText, setLoadingText] = useState('Laadimine...');
   const [loaded, setLoaded] = useState(false);
@@ -188,11 +188,16 @@ export default function SaunaViewer({ modelPath }) {
           if (!child.isMesh) return;
           child.castShadow = true;
           child.receiveShadow = true;
-          const mat = meshMatMap[child.name];
-          if (mat) {
-            child.material = mat;
-          } else if (child.material) {
-            child.material.side = THREE.DoubleSide;
+          if (bakedMaterials) {
+            // Use embedded materials, just ensure double-sided
+            if (child.material) child.material.side = THREE.DoubleSide;
+          } else {
+            const mat = meshMatMap[child.name];
+            if (mat) {
+              child.material = mat;
+            } else if (child.material) {
+              child.material.side = THREE.DoubleSide;
+            }
           }
         });
 

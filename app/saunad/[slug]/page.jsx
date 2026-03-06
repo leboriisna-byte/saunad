@@ -24,7 +24,7 @@ export default async function SaunaPage({ params }) {
 
   return (
     <>
-      <SaunaViewerWrapper modelPath={sauna.model} />
+      <SaunaViewerWrapper modelPath={sauna.model} bakedMaterials={sauna.bakedMaterials} />
       <ProductCard sauna={sauna} />
     </>
   );
