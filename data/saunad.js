@@ -10,6 +10,14 @@ export const saunad = [
     priceIncVat: '780.00€',
     priceExVat: '3,250.00€',
     model: '/models/sauna_model.glb',
+    specs: [
+      { label: 'Välisdiameeter', value: '2.4 m' },
+      { label: 'Siseruumi kõrgus', value: '1.9 m' },
+      { label: 'Pikkus', value: '3.0 – 6.0 m (valik)' },
+      { label: 'Seina paksus', value: '44 mm' },
+      { label: 'Puit', value: 'Kuusk' },
+      { label: 'Katus', value: 'Asfalt katusekivid' },
+    ],
   },
 ];
 

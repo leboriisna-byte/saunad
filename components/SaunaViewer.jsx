@@ -56,8 +56,13 @@ export default function SaunaViewer({ modelPath }) {
     fillLight.position.set(3, 3, 5);
     scene.add(fillLight);
 
-    scene.add(Object.assign(new THREE.DirectionalLight(0xffffff, 0.6), { position: new THREE.Vector3(2, 4, -4) }));
-    scene.add(Object.assign(new THREE.DirectionalLight(0xffe8d0, 0.5), { position: new THREE.Vector3(0, -3, 2) }));
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    rimLight.position.set(2, 4, -4);
+    scene.add(rimLight);
+
+    const bottomLight = new THREE.DirectionalLight(0xffe8d0, 0.5);
+    bottomLight.position.set(0, -3, 2);
+    scene.add(bottomLight);
 
     // ── Ground ─────────────────────────────────────────────
     const ground = new THREE.Mesh(

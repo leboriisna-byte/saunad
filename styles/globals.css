@@ -49,7 +49,6 @@ body {
 .logo img {
   height: 40px;
   width: auto;
-  filter: brightness(0) invert(1);
 }
 
 .nav-links {
@@ -234,6 +233,97 @@ body {
   transform: translateY(-2px);
   color: var(--primary-color);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.icon-btn.active {
+  background: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(229, 141, 25, 0.35);
+}
+
+/* ── Specs panel ─────────────────────────────────────────── */
+.specs-panel {
+  position: absolute;
+  bottom: 110px;
+  right: 40px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 14px;
+  padding: 18px 24px 18px;
+  z-index: 15;
+  width: 300px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+}
+
+/* Arrow pointing down toward the buttons */
+.specs-arrow {
+  position: absolute;
+  bottom: -8px;
+  right: 144px;
+  width: 16px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.06));
+}
+
+.specs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.specs-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+
+.specs-close:hover {
+  color: var(--text-dark);
+}
+
+.specs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.specs-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.specs-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.specs-label {
+  color: var(--text-light);
+}
+
+.specs-value {
+  font-weight: 500;
+  color: var(--text-dark);
 }
 
 @media (max-width: 768px) {

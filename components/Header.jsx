@@ -11,7 +11,7 @@ export default function Header({ saunad }) {
     <header className="top-bar">
       <div className="logo">
         <Link href="/">
-          <Image src="/Group.svg" alt="Tesler Grupp" width={120} height={40} style={{ filter: 'brightness(0) invert(1)' }} />
+          <Image src="/Group.svg" alt="Tesler Grupp" width={120} height={40} />
         </Link>
       </div>
       <nav className="nav-links">
