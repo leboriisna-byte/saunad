@@ -21,6 +21,27 @@ export const saunad = [
     ],
   },
   {
+    slug: 'vaike-delux-2',
+    name: 'Väike Delux',
+    size: '2.4m v2',
+    label: 'Väike Delux 2.4m v2',
+    description:
+      'Luksus loodi nautimiseks, nagu ka hea kuum leil ja külmad karastusjoogid. Delux saunas saad nautida mõlemat ja tunda end nagu vana roomlane legendaarsetes Caracalla termides.',
+    price: '4,030.00€',
+    priceIncVat: '780.00€',
+    priceExVat: '3,250.00€',
+    model: '/models/VaikeDelux2.4m-2.glb',
+    bakedMaterials: true,
+    specs: [
+      { label: 'Välisdiameeter', value: '2.4 m' },
+      { label: 'Siseruumi kõrgus', value: '1.9 m' },
+      { label: 'Pikkus', value: '3.0 – 6.0 m (valik)' },
+      { label: 'Seina paksus', value: '44 mm' },
+      { label: 'Puit', value: 'Kuusk' },
+      { label: 'Katus', value: 'Asfalt katusekivid' },
+    ],
+  },
+  {
     slug: 'barrel-klassik',
     name: 'Barrel Klassik',
     size: '3.3m',

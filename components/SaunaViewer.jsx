@@ -201,10 +201,11 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
           }
         });
 
-        // Add to scene first so Three.js fully resolves all world transforms
+        // Add to scene first, then force matrix update so world transforms are resolved
         scene.add(model);
+        model.updateMatrixWorld(true);
 
-        // Compute bounds from mesh geometry only (skips empties/helpers)
+        // Compute bounds from mesh geometry only (skips empties/helpers like MIRROR)
         const box = new THREE.Box3();
         model.traverse((child) => {
           if (child.isMesh) box.expandByObject(child);
@@ -212,21 +213,15 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
 
-        // Center model horizontally, sit on ground
+        // Center horizontally, sit on ground
         model.position.x -= center.x;
         model.position.z -= center.z;
         model.position.y -= box.min.y;
 
-        // Recompute after repositioning for accurate orbit target
-        const box2 = new THREE.Box3();
-        model.traverse((child) => {
-          if (child.isMesh) box2.expandByObject(child);
-        });
-        const center2 = box2.getCenter(new THREE.Vector3());
-
-        controls.target.copy(center2);
+        // After centering, the visual center is exactly (0, size.y/2, 0)
+        controls.target.set(0, size.y / 2, 0);
         const maxDim = Math.max(size.x, size.y, size.z);
-        camera.position.set(center2.x + maxDim * 1.5, center2.y + maxDim * 0.8, center2.z + maxDim * 1.8);
+        camera.position.set(maxDim * 1.5, maxDim * 0.8, maxDim * 1.8);
         controls.update();
 
         setLoaded(true);
