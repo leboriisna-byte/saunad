@@ -182,14 +182,12 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
       modelPath,
       (gltf) => {
         const model = gltf.scene;
-        saunaModel = model;
 
         model.traverse((child) => {
           if (!child.isMesh) return;
           child.castShadow = true;
           child.receiveShadow = true;
           if (bakedMaterials) {
-            // Use embedded materials, just ensure double-sided
             if (child.material) child.material.side = THREE.DoubleSide;
           } else {
             const mat = meshMatMap[child.name];
@@ -201,8 +199,10 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
           }
         });
 
-        // Add to scene first, then force matrix update so world transforms are resolved
-        scene.add(model);
+        // Pivot group has no internal rotation — safe to rotate around world Y
+        const pivot = new THREE.Group();
+        scene.add(pivot);
+        pivot.add(model);
         model.updateMatrixWorld(true);
 
         // Compute bounds from mesh geometry only (skips empties/helpers like MIRROR)
@@ -213,17 +213,17 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
 
-        // Center horizontally, sit on ground
+        // Offset model within pivot so pivot origin = model's bottom-center
         model.position.x -= center.x;
         model.position.z -= center.z;
         model.position.y -= box.min.y;
 
-        // After centering, the visual center is exactly (0, size.y/2, 0)
         controls.target.set(0, size.y / 2, 0);
         const maxDim = Math.max(size.x, size.y, size.z);
         camera.position.set(maxDim * 1.5, maxDim * 0.8, maxDim * 1.8);
         controls.update();
 
+        saunaModel = pivot; // rotate the pivot — not the model with its internal transforms
         setLoaded(true);
       },
       (progress) => {
