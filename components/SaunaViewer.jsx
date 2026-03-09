@@ -226,12 +226,7 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
         saunaModel = pivot; // rotate the pivot — not the model with its internal transforms
         setLoaded(true);
       },
-      (progress) => {
-        if (progress.total > 0) {
-          const pct = Math.min(100, Math.round((progress.loaded / progress.total) * 100));
-          setLoadingText(`Laadimine... ${pct}%`);
-        }
-      },
+      () => {},
       (error) => {
         console.error('GLB load error:', error);
         setLoadingText('Viga laadimisel.');
