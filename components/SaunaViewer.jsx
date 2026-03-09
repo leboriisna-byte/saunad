@@ -228,7 +228,7 @@ export default function SaunaViewer({ modelPath, bakedMaterials = false }) {
       },
       (progress) => {
         if (progress.total > 0) {
-          const pct = Math.round((progress.loaded / progress.total) * 100);
+          const pct = Math.min(100, Math.round((progress.loaded / progress.total) * 100));
           setLoadingText(`Laadimine... ${pct}%`);
         }
       },
